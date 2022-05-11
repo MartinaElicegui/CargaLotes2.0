@@ -11,7 +11,7 @@ def main():
     totalApremios = calcularRepeticiones(informacion,driver)
     posicion = 0
     while (True):
-        # cargarDatosProfesional(informacion,driver)
+        cargarDatosProfesional(informacion,driver)
         posicion = posicion + cargarDatosDemandados(informacion,driver,totalApremios,posicion)
         if (posicion>=totalApremios[2]):
             break
