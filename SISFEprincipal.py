@@ -1,5 +1,6 @@
 import sys
 from SISFEfunciones import *
+from easygui import *
 
 def main(): 
     validarArchivo() 
@@ -10,11 +11,12 @@ def main():
     totalApremios = calcularRepeticiones(informacion,driver)
     posicion = 0
     while (True):
-        cargarDatosProfesional(informacion,driver)
+        # cargarDatosProfesional(informacion,driver)
         posicion = posicion + cargarDatosDemandados(informacion,driver,totalApremios,posicion)
         if (posicion>=totalApremios[2]):
             break
-    input("Presione una tecla para salir del navegador automatizado")
+    # input("Presione una tecla para salir del navegador automatizado")
+    # msgbox("Cree el lote y acepte para salir del navegador automatizado")
 if __name__ == "__main__":
     sys.exit(main())
 

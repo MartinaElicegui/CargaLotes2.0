@@ -7,6 +7,7 @@ from pathlib import *
 from selenium import webdriver
 from random import randint
 from time import sleep
+from easygui import *
 import csv
 import os
 
@@ -60,6 +61,7 @@ def leerArchivos():
 # Loguea al profesional en el SISFE
 def loguearProfesional(driver):
     driver.get('https://sisfe.justiciasantafe.gov.ar/login-matriculado')
+    driver.maximize_window()
     botonIngresar = esperarCargaElemento("botonIngresar", driver)
     informacion = open("datos.csv","r", encoding="latin1")
     count = 0
@@ -84,7 +86,8 @@ def loguearProfesional(driver):
             textAreaMatricula.send_keys(matricula)
             textAreaContraseña = driver.find_element_by_id("password")
             textAreaContraseña.send_keys(contraseña)
-            input("Complete el captcha y presione enter para continuar")
+            # input("Complete el captcha y presione enter para continuar")
+            msgbox("Complete el captcha. Cuando termine, presione OK para continuar.")
             
             botonIngresar.click()
 
@@ -255,11 +258,12 @@ def cargarDatosDemandados(info, driver, totalApremios, pos):
             adjunto.send_keys(archivoAdjuntar)
         except:
             sigue = False
-            input("No hay más registros que cargar, cree el lote y presione una tecla para terminar.")
-            driver.close()
+            # input("No hay más registros que cargar, cree el lote y presione una tecla para terminar.")
+            msgbox("No hay más registros que cargar. Cree el lote y acepte para terminar.")
             break
     if (sigue):
-        input("Ingrese una tecla para continuar")
+        # input("Ingrese una tecla para continuar")
+        msgbox("Cree el lote. Cuando termine, presione OK para continuar")
         driver.get("https://sisfe.justiciasantafe.gov.ar/nuevo-lote-demanda")
     return(i+1)
 
