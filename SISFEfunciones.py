@@ -259,12 +259,15 @@ def cargarDatosDemandados(info, driver, totalApremios, pos):
         except:
             sigue = False
             # input("No hay más registros que cargar, cree el lote y presione una tecla para terminar.")
-            msgbox("No hay más registros que cargar. Cree el lote y acepte para terminar.")
+            # msgbox("No hay más registros que cargar. Cree el lote y acepte para terminar.")
             break
+
     if (sigue):
         # input("Ingrese una tecla para continuar")
         msgbox("Cree el lote. Cuando termine, presione OK para continuar")
         driver.get("https://sisfe.justiciasantafe.gov.ar/nuevo-lote-demanda")
+    # if (sigue == False):
+        # msgbox("NO HAY MÁS REGISTROS QUE CARGAR. CREE EL LOTE Y ACEPTE PARA TERMINAR.")
     return(i+1)
 
 # Valida que la cantidad de columnas sea correcta para cada registro.

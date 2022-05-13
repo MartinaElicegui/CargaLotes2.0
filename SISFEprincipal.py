@@ -11,9 +11,10 @@ def main():
     totalApremios = calcularRepeticiones(informacion,driver)
     posicion = 0
     while (True):
-        cargarDatosProfesional(informacion,driver)
+        # cargarDatosProfesional(informacion,driver)
         posicion = posicion + cargarDatosDemandados(informacion,driver,totalApremios,posicion)
         if (posicion>=totalApremios[2]):
+            msgbox("CREE EL LOTE Y PRESIONE ACEPTAR PARA TERMINAR.")
             break
     # input("Presione una tecla para salir del navegador automatizado")
     # msgbox("Cree el lote y acepte para salir del navegador automatizado")
