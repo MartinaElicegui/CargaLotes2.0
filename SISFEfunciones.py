@@ -29,6 +29,7 @@ def leerArchivos():
     demandas = open(ruta + os.sep + "RegistrosAprocesar.csv","r", encoding="latin")
 
     totalApremios = sum(1 for row in demandas)
+    print("LA CANTIDAD TOTAL DE APREMIOS ES: ", totalApremios)
     demandas.seek(0)
 
     contadorDemandas = 0
@@ -274,8 +275,10 @@ def cargarDatosDemandados(info, driver, totalApremios, pos):
 # El archivo RegistrosAprocesar contendrá todos los registros que pasen esta prueba.
 def validarArchivo():
     quitar_registros = []
-
-    with open('Cabecera/presentarCirc1.csv') as csv_file:
+    # Circ1 OK
+    # Circ4 MAL
+    # Circ5 OK
+    with open('Cabecera/presentar7.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
@@ -288,6 +291,7 @@ def validarArchivo():
                 agregarAprocesar(row)
         print(f'Se han procesado {line_count} líneas.')
     print(f"Existen {len(quitar_registros)} registros a quitar")
+    return (line_count - len(quitar_registros))
 
 def agregarAerrores(fila):
     with open('Cabecera/RegistrosConErrores.csv', 'a', newline='') as err:
