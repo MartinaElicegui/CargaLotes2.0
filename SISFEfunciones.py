@@ -10,6 +10,7 @@ from time import sleep
 from easygui import *
 import csv
 import os
+import codecs
 
 # Crea una instancia del driver y la devuelve
 def generarDriver():
@@ -26,10 +27,9 @@ def leerArchivos():
     pdfs = []
 
     ruta = os.path.join(os.getcwd(),"Cabecera")
-    demandas = open(ruta + os.sep + "RegistrosAprocesar.csv","r", encoding="latin")
+    demandas = codecs.open(ruta + os.sep + "RegistrosAprocesar.csv","r", encoding = 'ISO-8859-1')
 
     totalApremios = sum(1 for row in demandas)
-    print("LA CANTIDAD TOTAL DE APREMIOS ES: ", totalApremios)
     demandas.seek(0)
 
     contadorDemandas = 0
@@ -64,7 +64,7 @@ def loguearProfesional(driver):
     driver.get('https://sisfe.justiciasantafe.gov.ar/login-matriculado')
     driver.maximize_window()
     botonIngresar = esperarCargaElemento("botonIngresar", driver)
-    informacion = open("datos.csv","r", encoding="latin1")
+    informacion = codecs.open("datos.csv","r", encoding='ISO-8859-1')
     count = 0
     while True:
         count += 1
@@ -202,14 +202,14 @@ def cargarDatosProfesional(info,driver):
     textFieldDomicilio = esperarCargaElemento("textFieldDomicilio",driver)
     textFieldDomicilio.send_keys(info[11])
     sleep(randint(2,3))
-
+8
 # Scrollea para que se vea cómo se van completando los campos
 def scroll(driver):
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
 
 def calcularRepeticiones(info, driver):
     ruta = os.path.join(os.getcwd(),"Cabecera")
-    demandas = open(ruta + os.sep + "presentarCirc1.csv","r", encoding="latin")
+    demandas = codecs.open(ruta + os.sep + "presentarCirc1.csv","r", encoding ='ISO-8859-1')
     totalApremios = sum(1 for row in demandas)
     demandas.seek(0)
     repeticiones = totalApremios//20
@@ -259,32 +259,22 @@ def cargarDatosDemandados(info, driver, totalApremios, pos):
             adjunto.send_keys(archivoAdjuntar)
         except:
             sigue = False
-            # input("No hay más registros que cargar, cree el lote y presione una tecla para terminar.")
-            # msgbox("No hay más registros que cargar. Cree el lote y acepte para terminar.")
             break
-
     if (sigue):
-        # input("Ingrese una tecla para continuar")
         msgbox("Cree el lote. Cuando termine, presione OK para continuar")
         driver.get("https://sisfe.justiciasantafe.gov.ar/nuevo-lote-demanda")
-    # if (sigue == False):
-        # msgbox("NO HAY MÁS REGISTROS QUE CARGAR. CREE EL LOTE Y ACEPTE PARA TERMINAR.")
     return(i+1)
 
 # Valida que la cantidad de columnas sea correcta para cada registro.
 # El archivo RegistrosAprocesar contendrá todos los registros que pasen esta prueba.
 def validarArchivo():
     quitar_registros = []
-    # Circ1 OK
-    # Circ4 MAL
-    # Circ5 OK
-    with open('Cabecera/presentar7.csv') as csv_file:
+    with open('Cabecera/presentarCirc4.csv', encoding = 'UTF-8') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
             line_count += 1
             if (len(row) != 15):
-                print("Este registro contiene un error y se debe quitar para su procesamiento.")
                 quitar_registros.append(row)
                 agregarAerrores(row)
             else:
@@ -294,12 +284,12 @@ def validarArchivo():
     return (line_count - len(quitar_registros))
 
 def agregarAerrores(fila):
-    with open('Cabecera/RegistrosConErrores.csv', 'a', newline='') as err:
+    with open('Cabecera/RegistrosConErrores.csv', 'a', newline='', encoding = 'ISO-8859-1') as err:
         writer = csv.writer(err, delimiter=',')
         writer.writerow(fila)
 
 def agregarAprocesar(fila):
-    with open('Cabecera/RegistrosAprocesar.csv', 'a', newline='') as err:
+    with open('Cabecera/RegistrosAprocesar.csv', 'a', newline='', encoding = 'ISO-8859-1') as err:
         writer = csv.writer(err, delimiter=',')
         writer.writerow(fila)
 

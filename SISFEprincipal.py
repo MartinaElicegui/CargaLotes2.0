@@ -11,12 +11,10 @@ def main():
     totalApremios = calcularRepeticiones(informacion,driver)
     posicion = 0
     while (True):
-        # cargarDatosProfesional(informacion,driver)
+        cargarDatosProfesional(informacion,driver)
         posicion = posicion + cargarDatosDemandados(informacion,driver,totalApremios,posicion)
-        print("La posición es: ", posicion)
-        print("La cantidad de apremios es", cantidadApremios) 
         if (posicion>cantidadApremios):
-            msgbox("CREE EL LOTE Y PRESIONE ACEPTAR PARA TERMINAR.")
+            msgbox("Cree el lote y presione aceptar para terminar.")
             break
 
 if __name__ == "__main__":
