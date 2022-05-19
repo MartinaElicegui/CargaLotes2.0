@@ -267,6 +267,7 @@ def cargarDatosDemandados(info, driver, totalApremios, pos):
 
 # Valida que la cantidad de columnas sea correcta para cada registro.
 # El archivo RegistrosAprocesar contendrá todos los registros que pasen esta prueba.
+# Ojo con el formato de los CSV, debe ser UTF-8 para funcionar.
 def validarArchivo():
     quitar_registros = []
     with open('Cabecera/presentarCirc4.csv', encoding = 'UTF-8') as csv_file:
