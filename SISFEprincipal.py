@@ -3,7 +3,7 @@ from SISFEfunciones import *
 from easygui import *
 
 def main(): 
-    validarArchivo() 
+    cantidadApremios = validarArchivo() 
     driver = generarDriver()
     informacion = leerArchivos()
     loguearProfesional(driver)
@@ -13,10 +13,10 @@ def main():
     while (True):
         cargarDatosProfesional(informacion,driver)
         posicion = posicion + cargarDatosDemandados(informacion,driver,totalApremios,posicion)
-        if (posicion>=totalApremios[2]):
+        if (posicion>cantidadApremios):
+            msgbox("Cree el lote y presione aceptar para terminar.")
             break
-    # input("Presione una tecla para salir del navegador automatizado")
-    # msgbox("Cree el lote y acepte para salir del navegador automatizado")
+
 if __name__ == "__main__":
     sys.exit(main())
 
